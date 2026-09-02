@@ -14,3 +14,24 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.employee_name
+
+
+
+class RegisteredUser(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    email = models.EmailField(unique=True)
+    mobile = models.CharField(max_length=15)
+    password = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name
+
+
+
+class LoginHistory(models.Model):
+    name = models.CharField(max_length=100)
+    login_time = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name

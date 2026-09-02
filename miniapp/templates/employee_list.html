@@ -59,957 +59,886 @@
     {% endfor %}
 
 </body>
-</html> -->
+</html>
+
+ -->
+
+
 
 
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
-    <title>Employee List</title>
+    <meta charset="UTF-8">
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AKFLIX | Employee List</title>
 
     <style>
 
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
+            margin: 0;
             min-height: 100vh;
-            overflow-x: hidden;
-
-            font-family: Arial, sans-serif;
-
             color: white;
-
-            background:
-                linear-gradient(
-                    rgba(5, 8, 20, 0.78),
-                    rgba(5, 8, 20, 0.94)
-                ),
-                url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2000&q=85");
-
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-
-            perspective: 1200px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #030303;
+            overflow-x: hidden;
         }
 
 
-        /* =========================
+        /* =====================================================
            ANIMATED BACKGROUND
-        ========================= */
+        ===================================================== */
 
-        .background {
+        .scene {
             position: fixed;
             inset: 0;
-
             overflow: hidden;
-
-            pointer-events: none;
-
-            z-index: 0;
+            perspective: 1200px;
+            background:
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(229, 9, 20, .13),
+                    transparent 35%
+                ),
+                #030303;
+            z-index: -10;
         }
 
 
         .glow {
             position: absolute;
 
-            width: 350px;
-            height: 350px;
+            width: 600px;
+            height: 600px;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
 
             border-radius: 50%;
 
-            filter: blur(55px);
+            background: rgba(229, 9, 20, .08);
 
-            opacity: 0.38;
+            filter: blur(110px);
 
-            animation: glowMove 10s ease-in-out infinite;
-        }
-
-
-        .glow.one {
-            top: -150px;
-            left: -120px;
-
-            background: #765cff;
-        }
-
-
-        .glow.two {
-            right: -150px;
-            bottom: -150px;
-
-            background: #00d5ff;
-
-            animation-delay: -4s;
+            animation: glowMove 8s ease-in-out infinite;
         }
 
 
         @keyframes glowMove {
 
-            0%, 100% {
-                transform: translate(0, 0);
+            0%,
+            100% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(1);
             }
 
             50% {
-                transform: translate(45px, -35px);
+                transform:
+                    translate(-50%, -50%)
+                    scale(1.4);
             }
 
         }
 
 
-        /* =========================
-           3D FLOATING SHAPES
-        ========================= */
+        /* =====================================================
+           FLOATING 3D SHAPES
+        ===================================================== */
 
-        .shape {
+        .object {
             position: absolute;
 
-            border: 1px solid rgba(255,255,255,0.16);
+            border:
+                1px solid
+                rgba(255,255,255,.08);
 
-            background: rgba(255,255,255,0.035);
+            background:
+                rgba(255,255,255,.025);
 
             backdrop-filter: blur(5px);
 
+            box-shadow:
+                0 30px 80px
+                rgba(0,0,0,.55);
+
             transform-style: preserve-3d;
 
-            animation: rotateShape 15s linear infinite;
+            animation:
+                floating 9s ease-in-out infinite;
         }
 
 
-        .shape.one {
-            width: 75px;
-            height: 75px;
+        .object-one {
+            width: 190px;
+            height: 190px;
 
-            top: 16%;
-            left: 7%;
+            left: 4%;
+            top: 13%;
+
+            border-radius: 50%;
+
+            border-width: 7px;
         }
 
 
-        .shape.two {
-            width: 45px;
-            height: 45px;
+        .object-two {
+            width: 130px;
+            height: 180px;
 
-            right: 10%;
-            top: 25%;
+            right: 6%;
+            top: 17%;
 
-            animation-duration: 10s;
+            border-radius: 18px;
 
-            animation-direction: reverse;
+            transform:
+                rotateY(30deg)
+                rotateZ(8deg);
+
+            animation-delay: 2s;
         }
 
 
-        .shape.three {
-            width: 30px;
-            height: 30px;
+        .object-three {
+            width: 90px;
+            height: 90px;
 
-            left: 15%;
-            bottom: 15%;
+            left: 12%;
+            bottom: 10%;
 
-            animation-duration: 8s;
+            border-radius: 50%;
+
+            animation-delay: 4s;
         }
 
 
-        @keyframes rotateShape {
+        .object-four {
+            width: 150px;
+            height: 80px;
 
-            0% {
+            right: 13%;
+            bottom: 12%;
+
+            border-radius: 15px;
+
+            animation-delay: 1s;
+        }
+
+
+        @keyframes floating {
+
+            0%,
+            100% {
                 transform:
-                    rotateX(0deg)
-                    rotateY(0deg)
-                    rotateZ(0deg);
+                    translate3d(0,0,0)
+                    rotateY(15deg);
             }
 
             50% {
                 transform:
-                    rotateX(180deg)
-                    rotateY(180deg)
-                    rotateZ(90deg);
-            }
-
-            100% {
-                transform:
-                    rotateX(360deg)
-                    rotateY(360deg)
-                    rotateZ(180deg);
+                    translate3d(0,-35px,50px)
+                    rotateY(-15deg);
             }
 
         }
 
 
-        /* =========================
-           MAIN PAGE
-        ========================= */
+        /* =====================================================
+           PARTICLES
+        ===================================================== */
 
-        .page {
+        .particle {
+            position: absolute;
 
-            position: relative;
+            width: 4px;
+            height: 4px;
 
-            z-index: 5;
+            border-radius: 50%;
 
-            width: 94%;
+            background:
+                rgba(255,255,255,.5);
 
-            max-width: 1200px;
+            box-shadow:
+                0 0 12px
+                rgba(229,9,20,.8);
 
-            margin: 40px auto;
-
-            animation: pageIn 1s ease;
+            animation:
+                rise 10s linear infinite;
         }
 
 
-        @keyframes pageIn {
+        @keyframes rise {
 
             from {
-                opacity: 0;
-
                 transform:
-                    translateY(45px)
-                    rotateX(8deg);
+                    translateY(100vh);
+
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
             }
 
             to {
-                opacity: 1;
-
                 transform:
-                    translateY(0)
-                    rotateX(0);
+                    translateY(-20vh)
+                    translateX(100px);
+
+                opacity: 0;
             }
 
         }
 
 
-        /* =========================
-           HEADER
-        ========================= */
+        .p1 {
+            left: 10%;
+        }
 
-        .header {
+        .p2 {
+            left: 30%;
+            animation-delay: 2s;
+        }
 
+        .p3 {
+            left: 50%;
+            animation-delay: 4s;
+        }
+
+        .p4 {
+            left: 75%;
+            animation-delay: 1s;
+        }
+
+        .p5 {
+            left: 90%;
+            animation-delay: 3s;
+        }
+
+
+        /* =====================================================
+           MAIN PAGE
+        ===================================================== */
+
+        .page {
+            width: 92%;
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding:
+                35px 0 70px;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .topbar {
             display: flex;
 
-            align-items: center;
+            justify-content:
+                space-between;
 
-            justify-content: space-between;
+            align-items:
+                center;
 
-            gap: 20px;
-
-            padding: 28px 32px;
-
-            margin-bottom: 20px;
-
-            border-radius: 26px;
-
-            background:
-                rgba(15,20,40,0.64);
-
-            border:
-                1px solid rgba(255,255,255,0.15);
-
-            backdrop-filter: blur(25px);
-
-            box-shadow:
-                0 30px 70px rgba(0,0,0,0.45),
-                inset 0 1px 1px rgba(255,255,255,0.12);
-
-            transform-style: preserve-3d;
-
-            transition: 0.4s ease;
+            margin-bottom: 45px;
         }
 
 
-        .header:hover {
+        .brand {
+            font-size: 25px;
 
-            transform:
-                rotateX(2deg)
-                rotateY(-2deg)
-                translateZ(10px);
-        }
+            font-weight: 900;
 
+            letter-spacing: 4px;
 
-        .header-left {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 18px;
-        }
-
-
-        .list-icon {
-
-            width: 70px;
-            height: 70px;
-
-            flex-shrink: 0;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 20px;
-
-            font-size: 32px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(124,92,255,0.9),
-                    rgba(0,207,255,0.65)
-                );
-
-            box-shadow:
-                0 18px 40px rgba(0,0,0,0.4);
-
-            transform: translateZ(30px);
-
-            animation: iconFloat 4s ease-in-out infinite;
-        }
-
-
-        @keyframes iconFloat {
-
-            0%, 100% {
-                transform:
-                    translateZ(30px)
-                    translateY(0);
-            }
-
-            50% {
-                transform:
-                    translateZ(50px)
-                    translateY(-7px);
-            }
-
-        }
-
-
-        .header h1 {
-
-            margin: 0;
-
-            font-size: 32px;
-
-            font-weight: 700;
+            color: #e50914;
 
             text-shadow:
-                0 0 25px rgba(124,92,255,0.45);
+                0 0 25px
+                rgba(229,9,20,.5);
         }
 
 
-        .header p {
-
-            margin: 5px 0 0;
-
-            color:
-                rgba(255,255,255,0.50);
-
-            font-size: 14px;
+        .brand span {
+            color: white;
+            font-weight: 400;
         }
 
 
-        /* =========================
-           TOP BUTTONS
-        ========================= */
+        .dashboard {
+            color: #aaa;
 
-        .top-actions {
+            text-decoration: none;
 
+            padding:
+                9px 18px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius: 8px;
+
+            background:
+                rgba(255,255,255,.04);
+
+            transition: .3s;
+        }
+
+
+        .dashboard:hover {
+            color: white;
+
+            background:
+                rgba(255,255,255,.08);
+
+            border-color:
+                rgba(229,9,20,.4);
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
             display: flex;
 
-            gap: 10px;
+            justify-content:
+                space-between;
 
-            flex-wrap: wrap;
+            align-items:
+                flex-end;
+
+            gap: 25px;
+
+            margin-bottom: 30px;
         }
 
 
-        .nav-btn {
+        .heading small {
+            color: #777;
 
-            display: inline-flex;
+            letter-spacing: 2px;
 
-            align-items: center;
+            text-transform:
+                uppercase;
+        }
 
-            justify-content: center;
 
-            padding: 12px 19px;
+        .heading h1 {
+            margin:
+                8px 0 0;
 
-            border-radius: 12px;
+            font-size:
+                clamp(34px, 5vw, 55px);
+
+            font-weight: 800;
+        }
+
+
+        .heading h1 span {
+            color: #e50914;
+        }
+
+
+        /* =====================================================
+           ADD EMPLOYEE BUTTON
+        ===================================================== */
+
+        .add-button {
+            display: inline-block;
+
+            padding:
+                13px 21px;
+
+            border-radius: 9px;
+
+            background:
+                #e50914;
 
             color: white;
 
             text-decoration: none;
 
-            font-weight: 600;
+            font-weight: 700;
 
-            background:
-                rgba(255,255,255,0.07);
+            white-space: nowrap;
 
-            border:
-                1px solid rgba(255,255,255,0.12);
-
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease,
-                box-shadow 0.3s ease;
+            transition: .3s;
         }
 
 
-        .nav-btn:hover {
-
+        .add-button:hover {
             color: white;
+
+            background:
+                #ff1824;
 
             transform:
-                translateY(-4px)
-                scale(1.02);
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(124,92,255,0.80),
-                    rgba(0,217,255,0.55)
-                );
+                translateY(-3px);
 
             box-shadow:
-                0 15px 30px rgba(0,0,0,0.35);
+                0 12px 30px
+                rgba(229,9,20,.3);
         }
 
 
-        /* =========================
+        /* =====================================================
            MESSAGES
-        ========================= */
-
-        .messages {
-
-            margin-bottom: 20px;
-        }
-
+        ===================================================== */
 
         .message {
+            margin-bottom: 18px;
 
-            padding: 14px 18px;
+            padding:
+                13px 18px;
 
-            margin-bottom: 10px;
-
-            border-radius: 13px;
-
-            color: white;
+            border-radius: 10px;
 
             background:
-                rgba(0,200,150,0.12);
+                rgba(229,9,20,.10);
 
             border:
-                1px solid rgba(0,220,170,0.25);
+                1px solid
+                rgba(229,9,20,.25);
 
-            backdrop-filter: blur(15px);
-
-            animation: messageIn 0.6s ease;
+            color:
+                #ff9c9c;
         }
 
 
-        @keyframes messageIn {
+        /* =====================================================
+           SEARCH
+        ===================================================== */
 
-            from {
-                opacity: 0;
-                transform: translateX(-25px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-        }
-
-
-        /* =========================
-           SEARCH CARD
-        ========================= */
-
-        .search-card {
-
+        .search-box {
             display: flex;
 
-            align-items: center;
+            gap: 10px;
 
-            gap: 12px;
+            margin-bottom: 28px;
 
-            padding: 20px;
+            padding: 18px;
 
-            margin-bottom: 20px;
-
-            border-radius: 20px;
+            border-radius: 16px;
 
             background:
-                rgba(15,20,40,0.62);
+                rgba(255,255,255,.04);
 
             border:
-                1px solid rgba(255,255,255,0.13);
+                1px solid
+                rgba(255,255,255,.08);
 
-            backdrop-filter: blur(22px);
-
-            box-shadow:
-                0 20px 45px rgba(0,0,0,0.30);
+            backdrop-filter:
+                blur(15px);
         }
 
 
-        .search-card form {
-
-            display: flex;
-
-            width: 100%;
-
-            gap: 12px;
-        }
-
-
-        .search-input {
-
+        .search-box input {
             flex: 1;
 
-            padding: 14px 18px;
+            min-width: 0;
 
-            border-radius: 13px;
+            padding:
+                13px 16px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius: 9px;
 
             outline: none;
 
+            background:
+                rgba(0,0,0,.35);
+
             color: white;
 
-            background:
-                rgba(0,0,0,0.28);
+            font-size: 14px;
 
-            border:
-                1px solid rgba(255,255,255,0.13);
-
-            transition:
-                border 0.3s ease,
-                box-shadow 0.3s ease;
+            transition: .3s;
         }
 
 
-        .search-input::placeholder {
-
-            color:
-                rgba(255,255,255,0.40);
+        .search-box input::placeholder {
+            color: #666;
         }
 
 
-        .search-input:focus {
-
+        .search-box input:focus {
             border-color:
-                #7c5cff;
+                #e50914;
 
             box-shadow:
-                0 0 0 3px rgba(124,92,255,0.15),
-                0 0 25px rgba(124,92,255,0.20);
+                0 0 0 3px
+                rgba(229,9,20,.08);
         }
 
 
-        .search-btn {
-
-            padding: 13px 25px;
-
+        .search-button {
             border: none;
 
-            border-radius: 13px;
+            padding:
+                13px 22px;
 
-            color: white;
+            border-radius: 9px;
+
+            background:
+                white;
+
+            color: black;
 
             font-weight: 700;
 
             cursor: pointer;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #765cff,
-                    #00bfe8
-                );
-
-            box-shadow:
-                0 12px 25px rgba(70,90,255,0.25);
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease;
+            transition: .3s;
         }
 
 
-        .search-btn:hover {
+        .search-button:hover {
+            background:
+                #e50914;
+
+            color: white;
 
             transform:
-                translateY(-4px);
-
-            box-shadow:
-                0 18px 35px rgba(70,150,255,0.40);
+                translateY(-2px);
         }
 
 
-        /* =========================
-           EMPLOYEE LIST
-        ========================= */
+        /* =====================================================
+           EMPLOYEE CARDS
+        ===================================================== */
 
-        .employee-container {
-
+        .employees {
             display: grid;
 
             grid-template-columns:
-                repeat(auto-fit, minmax(300px, 1fr));
+                repeat(2, 1fr);
 
-            gap: 18px;
+            gap: 20px;
         }
 
 
         .employee-card {
-
             position: relative;
 
-            padding: 23px;
+            padding: 25px;
 
-            border-radius: 20px;
+            border-radius: 18px;
 
             background:
-                rgba(15,20,40,0.64);
+                rgba(255,255,255,.045);
 
             border:
-                1px solid rgba(255,255,255,0.12);
+                1px solid
+                rgba(255,255,255,.08);
 
-            backdrop-filter: blur(20px);
+            backdrop-filter:
+                blur(18px);
 
-            box-shadow:
-                0 20px 45px rgba(0,0,0,0.32);
-
-            transform-style: preserve-3d;
+            overflow: hidden;
 
             transition:
-                transform 0.4s ease,
-                box-shadow 0.4s ease,
-                border 0.4s ease;
-
-            animation: cardIn 0.7s ease both;
+                .35s ease;
         }
 
 
-        .employee-card:nth-child(2) {
-            animation-delay: 0.08s;
-        }
+        .employee-card::before {
+            content: "";
 
-        .employee-card:nth-child(3) {
-            animation-delay: 0.16s;
-        }
+            position: absolute;
 
-        .employee-card:nth-child(4) {
-            animation-delay: 0.24s;
-        }
+            width: 120px;
+            height: 120px;
 
-        .employee-card:nth-child(5) {
-            animation-delay: 0.32s;
-        }
+            right: -50px;
+            top: -50px;
 
+            border-radius: 50%;
 
-        @keyframes cardIn {
+            background:
+                rgba(229,9,20,.12);
 
-            from {
-                opacity: 0;
-
-                transform:
-                    translateY(25px)
-                    rotateX(8deg);
-            }
-
-            to {
-                opacity: 1;
-
-                transform:
-                    translateY(0)
-                    rotateX(0);
-            }
-
+            filter: blur(15px);
         }
 
 
         .employee-card:hover {
-
             transform:
-                translateY(-8px)
-                rotateX(2deg)
-                rotateY(-2deg)
-                translateZ(12px);
+                translateY(-7px)
+                perspective(600px)
+                rotateX(3deg);
 
             border-color:
-                rgba(124,92,255,0.35);
+                rgba(229,9,20,.35);
 
             box-shadow:
-                0 30px 60px rgba(0,0,0,0.48);
+                0 25px 60px
+                rgba(0,0,0,.5);
         }
 
 
         .employee-top {
-
             display: flex;
 
-            align-items: center;
+            align-items:
+                center;
 
-            gap: 14px;
+            gap: 15px;
 
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
 
-        .employee-avatar {
-
-            width: 52px;
-            height: 52px;
+        .avatar {
+            width: 55px;
+            height: 55px;
 
             flex-shrink: 0;
 
             display: flex;
 
-            align-items: center;
-            justify-content: center;
+            align-items:
+                center;
 
-            border-radius: 15px;
+            justify-content:
+                center;
 
-            font-size: 23px;
+            border-radius: 50%;
 
             background:
                 linear-gradient(
-                    135deg,
-                    rgba(124,92,255,0.75),
-                    rgba(0,217,255,0.45)
+                    145deg,
+                    #e50914,
+                    #500000
                 );
 
-            box-shadow:
-                0 10px 25px rgba(0,0,0,0.30);
+            font-size: 20px;
 
-            transform: translateZ(20px);
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 25px
+                rgba(229,9,20,.2);
         }
 
 
         .employee-name {
+            font-size: 20px;
 
-            font-size: 18px;
+            font-weight: 800;
 
-            font-weight: 700;
+            margin: 0;
+        }
+
+
+        .employee-department {
+            margin-top: 5px;
+
+            color: #888;
+
+            font-size: 13px;
         }
 
 
         .employee-id {
-
-            margin-top: 3px;
-
-            color:
-                rgba(255,255,255,0.43);
-
-            font-size: 12px;
-        }
-
-
-        .department {
-
-            display: inline-block;
-
-            padding: 7px 11px;
-
-            margin-bottom: 18px;
-
-            border-radius: 9px;
-
-            color:
-                #bceeff;
+            color: #777;
 
             font-size: 12px;
 
-            font-weight: 600;
+            letter-spacing: 1px;
 
-            background:
-                rgba(0,200,255,0.09);
-
-            border:
-                1px solid rgba(0,200,255,0.16);
+            margin-bottom: 20px;
         }
 
 
-        /* =========================
+        /* =====================================================
            CARD ACTIONS
-        ========================= */
+        ===================================================== */
 
-        .card-actions {
-
+        .actions {
             display: flex;
+
+            flex-wrap: wrap;
 
             gap: 8px;
 
-            flex-wrap: wrap;
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.07);
         }
 
 
-        .card-btn {
+        .action {
+            padding:
+                8px 13px;
 
-            flex: 1;
-
-            min-width: 80px;
-
-            padding: 10px 12px;
-
-            border-radius: 10px;
-
-            text-align: center;
-
-            color: white;
+            border-radius: 7px;
 
             text-decoration: none;
 
-            font-size: 13px;
+            font-size: 12px;
 
-            font-weight: 600;
+            font-weight: 700;
 
-            background:
-                rgba(255,255,255,0.06);
-
-            border:
-                1px solid rgba(255,255,255,0.10);
-
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease,
-                box-shadow 0.3s ease;
+            transition: .3s;
         }
 
 
-        .card-btn:hover {
+        .view {
+            background:
+                rgba(255,255,255,.08);
 
             color: white;
-
-            transform:
-                translateY(-3px);
-
-            background:
-                rgba(124,92,255,0.55);
-
-            box-shadow:
-                0 10px 20px rgba(0,0,0,0.30);
         }
 
 
-        .delete-btn:hover {
+        .view:hover {
+            color: white;
 
             background:
-                rgba(255,70,90,0.65);
+                rgba(255,255,255,.15);
         }
 
 
-        /* =========================
-           EMPTY STATE
-        ========================= */
+        .edit {
+            background:
+                rgba(229,9,20,.12);
+
+            color:
+                #ff7777;
+
+            border:
+                1px solid
+                rgba(229,9,20,.2);
+        }
+
+
+        .edit:hover {
+            color: white;
+
+            background:
+                #e50914;
+        }
+
+
+        .delete {
+            background:
+                rgba(255,255,255,.04);
+
+            color:
+                #888;
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+        }
+
+
+        .delete:hover {
+            color: white;
+
+            background:
+                #b00000;
+
+            border-color:
+                #b00000;
+        }
+
+
+        /* =====================================================
+           EMPTY
+        ===================================================== */
 
         .empty {
-
-            grid-column: 1 / -1;
-
             padding: 60px 20px;
 
             text-align: center;
 
-            border-radius: 22px;
+            border-radius: 18px;
 
             background:
-                rgba(15,20,40,0.62);
+                rgba(255,255,255,.035);
 
             border:
-                1px solid rgba(255,255,255,0.12);
+                1px solid
+                rgba(255,255,255,.08);
 
-            backdrop-filter: blur(20px);
+            color: #777;
 
-            color:
-                rgba(255,255,255,0.50);
-
-            box-shadow:
-                0 20px 45px rgba(0,0,0,0.30);
+            grid-column: 1 / -1;
         }
 
 
-        .empty-icon {
-
-            font-size: 50px;
-
-            margin-bottom: 15px;
-        }
-
-
-        .empty-text {
-
-            font-size: 18px;
-
-            color:
-                rgba(255,255,255,0.70);
-        }
-
-
-        /* =========================
+        /* =====================================================
            MOBILE
-        ========================= */
+        ===================================================== */
 
-        @media (max-width: 700px) {
+        @media(max-width:800px) {
 
-            .page {
-
-                width: 92%;
-
-                margin: 25px auto;
+            .employees {
+                grid-template-columns:
+                    1fr;
             }
-
 
             .header {
+                align-items:
+                    flex-start;
 
-                flex-direction: column;
-
-                align-items: flex-start;
-
-                padding: 24px;
+                flex-direction:
+                    column;
             }
 
-
-            .header h1 {
-
-                font-size: 27px;
+            .add-button {
+                width: 100%;
+                text-align: center;
             }
 
+        }
 
-            .top-actions {
 
+        @media(max-width:550px) {
+
+            .page {
+                width: 90%;
+            }
+
+            .search-box {
+                flex-direction:
+                    column;
+            }
+
+            .search-button {
                 width: 100%;
             }
 
-
-            .nav-btn {
-
-                flex: 1;
-            }
-
-
-            .search-card form {
-
-                flex-direction: column;
-            }
-
-
-            .search-btn {
-
-                width: 100%;
-            }
-
-
-            .employee-container {
-
-                grid-template-columns: 1fr;
+            .object {
+                opacity: .2;
             }
 
         }
@@ -1022,159 +951,184 @@
 <body>
 
 
-    <!-- =========================
-         ANIMATED BACKGROUND
-    ========================= -->
+    <!-- =====================================================
+         BACKGROUND
+    ===================================================== -->
 
-    <div class="background">
+    <div class="scene">
 
-        <div class="glow one"></div>
+        <div class="glow"></div>
 
-        <div class="glow two"></div>
+        <div class="object object-one"></div>
 
-        <div class="shape one"></div>
+        <div class="object object-two"></div>
 
-        <div class="shape two"></div>
+        <div class="object object-three"></div>
 
-        <div class="shape three"></div>
+        <div class="object object-four"></div>
+
+        <div class="particle p1"></div>
+
+        <div class="particle p2"></div>
+
+        <div class="particle p3"></div>
+
+        <div class="particle p4"></div>
+
+        <div class="particle p5"></div>
 
     </div>
 
 
-    <!-- =========================
-         MAIN PAGE
-    ========================= -->
+    <!-- =====================================================
+         PAGE
+    ===================================================== -->
 
     <main class="page">
 
 
-        <!-- HEADER -->
+        <!-- TOP BAR -->
+
+        <nav class="topbar">
+
+            <div class="brand">
+
+                AK<span>FLIX</span>
+
+            </div>
+
+
+            <a
+                href="{% url 'dashboard' %}"
+                class="dashboard"
+            >
+
+                ← Dashboard
+
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             HEADER
+        ================================================= -->
 
         <section class="header">
 
-            <div class="header-left">
 
-                <div class="list-icon">
-                    👥
-                </div>
+            <div class="heading">
 
-                <div>
+                <small>
+                    Employee Management
+                </small>
 
-                    <h1>
-                        Employee List
-                    </h1>
+                <h1>
 
-                    <p>
-                        Manage and view all employees
-                    </p>
+                    Employee
+                    <span>List</span>
 
-                </div>
+                </h1>
 
             </div>
 
 
-            <div class="top-actions">
+            <a
+                href="{% url 'employee_form' %}"
+                class="add-button"
+            >
 
-                <a
-                    href="{% url 'dashboard' %}"
-                    class="nav-btn"
-                >
-                    📊 Dashboard
-                </a>
+                + Add Employee
 
+            </a>
 
-                <a
-                    href="{% url 'employee_form' %}"
-                    class="nav-btn"
-                >
-                    ➕ Add Employee
-                </a>
-
-            </div>
 
         </section>
 
 
-        <!-- =========================
+        <!-- =================================================
              MESSAGES
-        ========================= -->
+        ================================================= -->
 
         {% if messages %}
 
-            <div class="messages">
+            {% for message in messages %}
 
-                {% for message in messages %}
+                <div class="message">
 
-                    <div class="message">
+                    {{ message }}
 
-                        ✓ {{ message }}
+                </div>
 
-                    </div>
-
-                {% endfor %}
-
-            </div>
+            {% endfor %}
 
         {% endif %}
 
 
-        <!-- =========================
+        <!-- =================================================
              SEARCH
-        ========================= -->
+        ================================================= -->
 
-        <section class="search-card">
+        <form
+            method="GET"
+            class="search-box"
+        >
 
-            <form method="GET">
-
-                <input
-                    type="text"
-                    name="search"
-                    class="search-input"
-                    placeholder="🔍 Search by name or Employee ID"
-                >
-
-
-                <button
-                    type="submit"
-                    class="search-btn"
-                >
-                    Search
-                </button>
-
-            </form>
-
-        </section>
+            <input
+                type="text"
+                name="search"
+                placeholder="Search by name or Employee ID"
+            >
 
 
-        <!-- =========================
-             EMPLOYEES
-        ========================= -->
+            <button
+                type="submit"
+                class="search-button"
+            >
 
-        <section class="employee-container">
+                Search
+
+            </button>
+
+        </form>
+
+
+        <!-- =================================================
+             EMPLOYEE LIST
+        ================================================= -->
+
+        <section class="employees">
 
 
             {% for employee in employees %}
 
 
-                <div class="employee-card">
+                <article class="employee-card">
 
 
                     <div class="employee-top">
 
 
-                        <div class="employee-avatar">
-                            👤
+                        <div class="avatar">
+
+                            {{ employee.employee_name|first|upper }}
+
                         </div>
 
 
                         <div>
 
-                            <div class="employee-name">
-                                {{ employee.employee_name }}
-                            </div>
+                            <h2 class="employee-name">
 
-                            <div class="employee-id">
-                                ID: {{ employee.employee_id }}
+                                {{ employee.employee_name }}
+
+                            </h2>
+
+
+                            <div class="employee-department">
+
+                                {{ employee.department }}
+
                             </div>
 
                         </div>
@@ -1183,44 +1137,53 @@
                     </div>
 
 
-                    <div class="department">
+                    <div class="employee-id">
 
-                        🏢 {{ employee.department }}
+                        ID:
+                        {{ employee.employee_id }}
 
                     </div>
 
 
-                    <div class="card-actions">
+                    <!-- ACTIONS -->
+
+                    <div class="actions">
 
 
                         <a
                             href="{% url 'employee_detail' employee.id %}"
-                            class="card-btn"
+                            class="action view"
                         >
-                            👁 View
+
+                            View Details
+
                         </a>
 
 
                         <a
                             href="{% url 'employee_update' employee.id %}"
-                            class="card-btn"
+                            class="action edit"
                         >
-                            ✏️ Edit
+
+                            Edit
+
                         </a>
 
 
                         <a
                             href="{% url 'employee_delete' employee.id %}"
-                            class="card-btn delete-btn"
+                            class="action delete"
                         >
-                            🗑 Delete
+
+                            Delete
+
                         </a>
 
 
                     </div>
 
 
-                </div>
+                </article>
 
 
             {% empty %}
@@ -1228,13 +1191,7 @@
 
                 <div class="empty">
 
-                    <div class="empty-icon">
-                        🔍
-                    </div>
-
-                    <div class="empty-text">
-                        No employees found.
-                    </div>
+                    No employees found.
 
                 </div>
 
@@ -1248,5 +1205,42 @@
     </main>
 
 
+    <!-- =====================================================
+         MOUSE PARALLAX
+    ===================================================== -->
+
+    <script>
+
+        const scene =
+            document.querySelector(".scene");
+
+
+        document.addEventListener(
+            "mousemove",
+            function(event) {
+
+                const x =
+                    (event.clientX /
+                    window.innerWidth - .5) * 2;
+
+                const y =
+                    (event.clientY /
+                    window.innerHeight - .5) * 2;
+
+
+                scene.style.transform =
+                    `translate3d(
+                        ${x * -8}px,
+                        ${y * -8}px,
+                        0
+                    )`;
+
+            }
+        );
+
+    </script>
+
+
 </body>
+
 </html>

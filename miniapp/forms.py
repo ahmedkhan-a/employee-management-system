@@ -1,5 +1,5 @@
 from django import forms
-from .models import Employee
+from .models import Employee,RegisteredUser 
 
 
 class EmployeeForm(forms.ModelForm):
@@ -67,3 +67,60 @@ def clean_joining_date(self):
         raise forms.ValidationError("Joining date cannot be in the future.")
 
     return joining_date
+
+
+
+
+
+class RegistrationForm(forms.ModelForm):
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"autocomplete": "new-password"}
+        )
+    )
+
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"autocomplete": "new-password"}
+        )
+    )
+
+    class Meta:
+        model = RegisteredUser
+        fields = [
+            'name',
+            'email',
+            'mobile',
+            'password',
+            'confirm_password',
+        ]
+
+    def clean_mobile(self):
+        mobile = self.cleaned_data['mobile']
+
+        if not mobile.isdigit():
+            raise forms.ValidationError(
+                "Mobile number must contain only numbers."
+            )
+
+        if len(mobile) != 10:
+            raise forms.ValidationError(
+                "Mobile number must be 10 digits."
+            )
+
+        return mobile
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        password = cleaned_data.get('password')
+        confirm_password = cleaned_data.get('confirm_password')
+
+        if password and confirm_password:
+            if password != confirm_password:
+                raise forms.ValidationError(
+                    "Passwords do not match."
+                )
+
+        return cleaned_data

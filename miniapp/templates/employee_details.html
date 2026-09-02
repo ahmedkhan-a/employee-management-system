@@ -43,464 +43,618 @@
 
 
 </body>
-</html> -->
+</html>  -->
+
+
+
 
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
-    <title>Employee Details</title>
+    <meta charset="UTF-8">
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AKFLIX | Employee Details</title>
 
     <style>
 
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            min-height: 100vh;
-            overflow-x: hidden;
 
-            font-family: Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
 
             color: white;
 
-            background:
-                linear-gradient(
-                    rgba(5, 8, 20, 0.78),
-                    rgba(5, 8, 20, 0.94)
-                ),
-                url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=85");
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: #030303;
 
-            perspective: 1200px;
+            overflow-x: hidden;
+
         }
 
 
-        /* =========================
-           ANIMATED BACKGROUND
-        ========================= */
+        /* =====================================================
+           3D BACKGROUND
+        ===================================================== */
 
-        .background {
+        .scene {
+
             position: fixed;
+
             inset: 0;
 
             overflow: hidden;
 
-            pointer-events: none;
+            perspective: 1200px;
 
-            z-index: 0;
+            background:
+
+                radial-gradient(
+                    circle at 50% 50%,
+                    rgba(229,9,20,.13),
+                    transparent 35%
+                ),
+
+                #030303;
+
+            z-index: -10;
+
         }
 
 
-        .glow {
+        .red-glow {
+
             position: absolute;
 
-            width: 350px;
-            height: 350px;
+            width: 550px;
+            height: 550px;
+
+            left: 50%;
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
 
             border-radius: 50%;
 
-            filter: blur(55px);
+            background:
+                rgba(229,9,20,.09);
 
-            opacity: 0.38;
+            filter: blur(100px);
 
-            animation: glowMove 10s ease-in-out infinite;
+            animation:
+                glow 7s ease-in-out infinite;
+
         }
 
 
-        .glow.one {
-            top: -150px;
-            left: -120px;
+        @keyframes glow {
 
-            background: #765cff;
-        }
+            0%,
+            100% {
 
+                transform:
+                    translate(-50%, -50%)
+                    scale(1);
 
-        .glow.two {
-            right: -150px;
-            bottom: -150px;
-
-            background: #00d5ff;
-
-            animation-delay: -4s;
-        }
-
-
-        @keyframes glowMove {
-
-            0%, 100% {
-                transform: translate(0, 0);
             }
 
             50% {
-                transform: translate(45px, -35px);
+
+                transform:
+                    translate(-50%, -50%)
+                    scale(1.35);
+
             }
 
         }
 
 
-        /* =========================
-           3D SHAPES
-        ========================= */
+        /* =====================================================
+           FLOATING OBJECTS
+        ===================================================== */
 
-        .shape {
+        .floating {
+
             position: absolute;
 
-            border: 1px solid rgba(255,255,255,0.16);
+            border: 1px solid
+                rgba(255,255,255,.08);
 
-            background: rgba(255,255,255,0.035);
+            background:
+                rgba(255,255,255,.025);
 
-            backdrop-filter: blur(5px);
+            box-shadow:
+                0 30px 70px
+                rgba(0,0,0,.5);
 
-            transform-style: preserve-3d;
+            transform-style:
+                preserve-3d;
 
-            animation: rotateShape 15s linear infinite;
+            animation:
+                float 9s ease-in-out infinite;
+
         }
 
 
-        .shape.one {
-            width: 75px;
-            height: 75px;
+        .circle {
 
-            top: 17%;
-            left: 7%;
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            border-width: 7px;
+
+            left: 5%;
+            top: 13%;
+
         }
 
 
-        .shape.two {
-            width: 45px;
-            height: 45px;
+        .square {
 
-            right: 10%;
-            top: 27%;
+            width: 130px;
+            height: 180px;
 
-            animation-duration: 10s;
+            border-radius: 16px;
 
-            animation-direction: reverse;
+            right: 7%;
+            top: 18%;
+
+            transform:
+                rotateY(30deg)
+                rotateZ(8deg);
+
+            animation-delay: 2s;
+
         }
 
 
-        .shape.three {
-            width: 30px;
-            height: 30px;
+        .small-circle {
 
-            left: 15%;
-            bottom: 15%;
+            width: 90px;
+            height: 90px;
 
-            animation-duration: 8s;
+            border-radius: 50%;
+
+            left: 10%;
+            bottom: 10%;
+
+            animation-delay: 3s;
+
         }
 
 
-        @keyframes rotateShape {
+        .cube {
 
-            0% {
+            width: 130px;
+            height: 80px;
+
+            border-radius: 14px;
+
+            right: 12%;
+            bottom: 12%;
+
+            transform:
+                rotateY(-25deg);
+
+            animation-delay: 1s;
+
+        }
+
+
+        @keyframes float {
+
+            0%,
+            100% {
+
                 transform:
-                    rotateX(0deg)
-                    rotateY(0deg)
-                    rotateZ(0deg);
+                    translate3d(0,0,0)
+                    rotateY(15deg);
+
             }
 
             50% {
+
                 transform:
-                    rotateX(180deg)
-                    rotateY(180deg)
-                    rotateZ(90deg);
+                    translate3d(0,-35px,50px)
+                    rotateY(-15deg);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PARTICLES
+        ===================================================== */
+
+        .particle {
+
+            position: absolute;
+
+            width: 4px;
+            height: 4px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,.5);
+
+            box-shadow:
+                0 0 12px
+                rgba(229,9,20,.8);
+
+            animation:
+                particleMove 9s linear infinite;
+
+        }
+
+
+        @keyframes particleMove {
+
+            0% {
+
+                transform:
+                    translateY(100vh)
+                    translateX(0);
+
+                opacity: 0;
+
+            }
+
+            20% {
+
+                opacity: 1;
+
+            }
+
+            80% {
+
+                opacity: 1;
+
             }
 
             100% {
+
                 transform:
-                    rotateX(360deg)
-                    rotateY(360deg)
-                    rotateZ(180deg);
+                    translateY(-20vh)
+                    translateX(100px);
+
+                opacity: 0;
+
             }
 
         }
 
 
-        /* =========================
+        .p1 {
+            left: 10%;
+        }
+
+        .p2 {
+            left: 30%;
+            animation-delay: 2s;
+        }
+
+        .p3 {
+            left: 50%;
+            animation-delay: 4s;
+        }
+
+        .p4 {
+            left: 75%;
+            animation-delay: 1s;
+        }
+
+        .p5 {
+            left: 90%;
+            animation-delay: 3s;
+        }
+
+
+        /* =====================================================
            MAIN
-        ========================= */
+        ===================================================== */
 
         .page {
 
-            position: relative;
-
-            z-index: 5;
-
             width: 92%;
 
-            max-width: 1000px;
+            max-width: 1100px;
 
-            margin: 45px auto;
+            margin: auto;
 
-            animation: pageIn 1s ease;
+            padding:
+                35px 0 60px;
+
         }
 
 
-        @keyframes pageIn {
+        /* =====================================================
+           TOP BAR
+        ===================================================== */
+
+        .topbar {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-bottom: 45px;
+
+        }
+
+
+        .brand {
+
+            font-size: 25px;
+
+            font-weight: 900;
+
+            letter-spacing: 4px;
+
+            color:
+                #e50914;
+
+            text-shadow:
+                0 0 25px
+                rgba(229,9,20,.5);
+
+        }
+
+
+        .brand span {
+
+            color: white;
+
+            font-weight: 400;
+
+        }
+
+
+        .back-link {
+
+            color: #aaa;
+
+            text-decoration: none;
+
+            padding:
+                9px 17px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius: 8px;
+
+            background:
+                rgba(255,255,255,.04);
+
+            transition: .3s;
+
+        }
+
+
+        .back-link:hover {
+
+            color: white;
+
+            border-color:
+                rgba(229,9,20,.5);
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        /* =====================================================
+           HEADING
+        ===================================================== */
+
+        .heading {
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .heading small {
+
+            color: #777;
+
+            letter-spacing: 2px;
+
+            text-transform:
+                uppercase;
+
+        }
+
+
+        .heading h1 {
+
+            margin:
+                8px 0 0;
+
+            font-size:
+                clamp(32px, 5vw, 52px);
+
+            font-weight: 800;
+
+        }
+
+
+        .heading h1 span {
+
+            color:
+                #e50914;
+
+        }
+
+
+        /* =====================================================
+           EMPLOYEE CARD
+        ===================================================== */
+
+        .employee-card {
+
+            position: relative;
+
+            padding: 35px;
+
+            border-radius: 24px;
+
+            background:
+                rgba(10,10,10,.78);
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            backdrop-filter:
+                blur(25px);
+
+            box-shadow:
+
+                0 40px 100px
+                rgba(0,0,0,.65),
+
+                0 0 50px
+                rgba(229,9,20,.07);
+
+            animation:
+                cardEnter 1s ease;
+
+        }
+
+
+        @keyframes cardEnter {
 
             from {
+
                 opacity: 0;
 
                 transform:
-                    translateY(45px)
-                    rotateX(8deg);
+                    translateY(40px)
+                    rotateX(8deg)
+                    scale(.96);
+
             }
 
             to {
+
                 opacity: 1;
 
                 transform:
                     translateY(0)
-                    rotateX(0);
+                    rotateX(0)
+                    scale(1);
+
             }
 
         }
 
 
-        /* =========================
-           HEADER
-        ========================= */
+        /* =====================================================
+           EMPLOYEE HEADER
+        ===================================================== */
 
-        .header {
+        .employee-header {
 
             display: flex;
 
-            align-items: center;
+            align-items:
+                center;
 
-            gap: 20px;
+            gap: 22px;
 
-            padding: 30px;
+            padding-bottom: 30px;
 
-            margin-bottom: 22px;
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.08);
 
-            border-radius: 26px;
-
-            background:
-                rgba(15,20,40,0.64);
-
-            border:
-                1px solid rgba(255,255,255,0.15);
-
-            backdrop-filter: blur(25px);
-
-            box-shadow:
-                0 30px 70px rgba(0,0,0,0.45),
-                inset 0 1px 1px rgba(255,255,255,0.12);
-
-            transform-style: preserve-3d;
-
-            transition: 0.4s ease;
         }
 
 
-        .header:hover {
+        .avatar {
 
-            transform:
-                rotateX(2deg)
-                rotateY(-2deg)
-                translateZ(10px);
-        }
-
-
-        .profile-icon {
-
-            width: 75px;
-            height: 75px;
+            width: 85px;
+            height: 85px;
 
             flex-shrink: 0;
 
+            border-radius: 50%;
+
             display: flex;
 
-            align-items: center;
-            justify-content: center;
+            align-items:
+                center;
 
-            border-radius: 22px;
-
-            font-size: 34px;
+            justify-content:
+                center;
 
             background:
                 linear-gradient(
-                    135deg,
-                    rgba(124,92,255,0.9),
-                    rgba(0,207,255,0.65)
+                    145deg,
+                    #e50914,
+                    #500000
                 );
-
-            box-shadow:
-                0 18px 40px rgba(0,0,0,0.4);
-
-            transform: translateZ(30px);
-
-            animation: iconFloat 4s ease-in-out infinite;
-        }
-
-
-        @keyframes iconFloat {
-
-            0%, 100% {
-                transform:
-                    translateZ(30px)
-                    translateY(0);
-            }
-
-            50% {
-                transform:
-                    translateZ(50px)
-                    translateY(-7px);
-            }
-
-        }
-
-
-        .header h1 {
-
-            margin: 0;
-
-            font-size: 32px;
-
-            font-weight: 700;
-
-            text-shadow:
-                0 0 25px rgba(124,92,255,0.45);
-        }
-
-
-        .header p {
-
-            margin: 5px 0 0;
-
-            color:
-                rgba(255,255,255,0.50);
-
-            font-size: 14px;
-        }
-
-
-        /* =========================
-           EMPLOYEE PROFILE
-        ========================= */
-
-        .employee-card {
-
-            padding: 32px;
-
-            border-radius: 27px;
-
-            background:
-                rgba(15,20,40,0.64);
-
-            border:
-                1px solid rgba(255,255,255,0.14);
-
-            backdrop-filter: blur(25px);
-
-            box-shadow:
-                0 30px 70px rgba(0,0,0,0.45);
-
-            transform-style: preserve-3d;
-
-            transition:
-                transform 0.4s ease,
-                box-shadow 0.4s ease;
-        }
-
-
-        .employee-card:hover {
-
-            transform:
-                translateY(-5px)
-                rotateX(2deg)
-                rotateY(-2deg)
-                translateZ(10px);
-
-            box-shadow:
-                0 40px 85px rgba(0,0,0,0.55);
-        }
-
-
-        /* =========================
-           NAME AREA
-        ========================= */
-
-        .employee-heading {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 18px;
-
-            padding-bottom: 25px;
-
-            margin-bottom: 25px;
-
-            border-bottom:
-                1px solid rgba(255,255,255,0.10);
-        }
-
-
-        .large-avatar {
-
-            width: 65px;
-            height: 65px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 20px;
 
             font-size: 30px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(124,92,255,0.75),
-                    rgba(0,217,255,0.50)
-                );
+            font-weight: 800;
 
             box-shadow:
-                0 15px 35px rgba(0,0,0,0.35);
+                0 15px 35px
+                rgba(229,9,20,.25);
 
-            transform: translateZ(20px);
         }
 
 
-        .employee-name {
+        .employee-header h2 {
 
-            font-size: 25px;
+            margin: 0;
 
-            font-weight: 700;
+            font-size: 28px;
+
+            font-weight: 800;
+
         }
 
 
-        .employee-id {
+        .employee-header p {
 
-            margin-top: 5px;
+            margin:
+                6px 0 0;
 
-            color:
-                rgba(255,255,255,0.45);
+            color: #888;
 
-            font-size: 13px;
         }
 
 
-        /* =========================
-           DETAILS GRID
-        ========================= */
+        /* =====================================================
+           INFORMATION GRID
+        ===================================================== */
 
         .details-grid {
 
@@ -510,74 +664,80 @@
                 repeat(2, 1fr);
 
             gap: 16px;
+
+            margin-top: 30px;
+
         }
 
 
-        .detail-box {
+        .info {
 
-            padding: 19px;
+            padding: 20px;
 
-            border-radius: 16px;
+            border-radius: 14px;
 
             background:
-                rgba(255,255,255,0.055);
+                rgba(255,255,255,.035);
 
             border:
-                1px solid rgba(255,255,255,0.09);
+                1px solid
+                rgba(255,255,255,.07);
 
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease,
-                box-shadow 0.3s ease;
+            transition: .3s;
+
         }
 
 
-        .detail-box:hover {
+        .info:hover {
 
             transform:
-                translateY(-5px)
-                translateZ(8px);
+                translateY(-4px);
+
+            border-color:
+                rgba(229,9,20,.3);
 
             background:
-                rgba(255,255,255,0.09);
+                rgba(229,9,20,.055);
 
-            box-shadow:
-                0 15px 30px rgba(0,0,0,0.25);
         }
 
 
-        .detail-label {
+        .label {
 
-            margin-bottom: 7px;
+            display: block;
 
-            color:
-                rgba(255,255,255,0.43);
+            margin-bottom: 8px;
 
-            font-size: 12px;
+            color: #777;
 
-            text-transform: uppercase;
+            font-size: 11px;
 
-            letter-spacing: 1px;
+            text-transform:
+                uppercase;
+
+            letter-spacing: 1.5px;
+
         }
 
 
-        .detail-value {
+        .value {
 
-            color: white;
+            color: #eee;
 
             font-size: 16px;
 
             font-weight: 600;
 
             word-break: break-word;
+
         }
 
 
-        /* =========================
-           NAVIGATION
-        ========================= */
+        /* =====================================================
+           ACTIONS
+        ===================================================== */
 
-        .navigation {
+        .actions {
 
             display: flex;
 
@@ -585,175 +745,200 @@
 
             flex-wrap: wrap;
 
-            margin-top: 25px;
-        }
-
-
-        .nav-btn {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            padding: 13px 21px;
-
-            border-radius: 12px;
-
-            color: white;
-
-            text-decoration: none;
-
-            font-weight: 600;
-
-            background:
-                rgba(255,255,255,0.07);
-
-            border:
-                1px solid rgba(255,255,255,0.12);
-
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease,
-                box-shadow 0.3s ease;
-        }
-
-
-        .nav-btn:hover {
-
-            color: white;
-
-            transform:
-                translateY(-5px)
-                scale(1.02);
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(124,92,255,0.80),
-                    rgba(0,217,255,0.55)
-                );
-
-            box-shadow:
-                0 15px 30px rgba(0,0,0,0.35);
-        }
-
-
-        /* =========================
-           DELETE AREA
-        ========================= */
-
-        .danger-area {
-
-            margin-top: 25px;
+            margin-top: 30px;
 
             padding-top: 25px;
 
             border-top:
-                1px solid rgba(255,255,255,0.10);
+                1px solid
+                rgba(255,255,255,.08);
+
         }
 
 
-        .danger-title {
+        .button {
 
-            margin-bottom: 12px;
+            display: inline-block;
 
-            color:
-                rgba(255,255,255,0.45);
+            padding:
+                12px 21px;
 
-            font-size: 13px;
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            transition: .3s;
+
         }
 
 
-        .delete-btn {
+        .edit {
 
-            padding: 13px 22px;
-
-            border: none;
-
-            border-radius: 12px;
+            background:
+                #e50914;
 
             color: white;
+
+        }
+
+
+        .edit:hover {
+
+            color: white;
+
+            background:
+                #ff1824;
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(229,9,20,.3);
+
+        }
+
+
+        .list {
+
+            color: white;
+
+            background:
+                rgba(255,255,255,.06);
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+        }
+
+
+        .list:hover {
+
+            color: white;
+
+            background:
+                rgba(255,255,255,.11);
+
+        }
+
+
+        /* =====================================================
+           DELETE
+        ===================================================== */
+
+        .delete-form {
+
+            margin-left: auto;
+
+        }
+
+
+        .delete-button {
+
+            padding:
+                12px 21px;
+
+            border: 1px solid
+                rgba(255,70,70,.3);
+
+            border-radius: 9px;
+
+            background:
+                rgba(229,9,20,.08);
+
+            color:
+                #ff7777;
 
             font-weight: 700;
 
             cursor: pointer;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff4f70,
-                    #ff765e
-                );
+            transition: .3s;
 
-            box-shadow:
-                0 12px 25px rgba(255,70,90,0.20);
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease;
         }
 
 
-        .delete-btn:hover {
+        .delete-button:hover {
+
+            background:
+                #e50914;
+
+            color: white;
 
             transform:
-                translateY(-4px)
-                scale(1.02);
+                translateY(-3px);
 
-            box-shadow:
-                0 18px 35px rgba(255,70,90,0.35);
         }
 
 
-        /* =========================
+        /* =====================================================
            MOBILE
-        ========================= */
+        ===================================================== */
 
-        @media (max-width: 700px) {
+        @media(max-width:700px) {
 
             .page {
 
-                width: 92%;
+                width: 90%;
 
-                margin: 25px auto;
             }
 
 
-            .header {
+            .topbar {
 
-                padding: 25px;
-            }
+                margin-bottom: 35px;
 
-
-            .header h1 {
-
-                font-size: 26px;
             }
 
 
             .employee-card {
 
-                padding: 23px;
+                padding: 25px;
+
+            }
+
+
+            .employee-header {
+
+                align-items:
+                    flex-start;
+
             }
 
 
             .details-grid {
 
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
+
             }
 
 
-            .navigation {
+            .delete-form {
 
-                flex-direction: column;
-            }
-
-
-            .nav-btn {
+                margin-left: 0;
 
                 width: 100%;
+
+            }
+
+
+            .delete-button {
+
+                width: 100%;
+
+            }
+
+
+            .floating {
+
+                opacity: .25;
+
             }
 
         }
@@ -766,190 +951,216 @@
 <body>
 
 
-    <!-- =========================
-         ANIMATED BACKGROUND
-    ========================= -->
+    <!-- =====================================================
+         BACKGROUND
+    ===================================================== -->
 
-    <div class="background">
+    <div class="scene">
 
-        <div class="glow one"></div>
+        <div class="red-glow"></div>
 
-        <div class="glow two"></div>
+        <div class="floating circle"></div>
 
-        <div class="shape one"></div>
+        <div class="floating square"></div>
 
-        <div class="shape two"></div>
+        <div class="floating small-circle"></div>
 
-        <div class="shape three"></div>
+        <div class="floating cube"></div>
+
+        <div class="particle p1"></div>
+
+        <div class="particle p2"></div>
+
+        <div class="particle p3"></div>
+
+        <div class="particle p4"></div>
+
+        <div class="particle p5"></div>
 
     </div>
 
 
-    <!-- =========================
-         MAIN PAGE
-    ========================= -->
+    <!-- =====================================================
+         PAGE
+    ===================================================== -->
 
     <main class="page">
 
 
-        <!-- HEADER -->
+        <!-- TOP BAR -->
 
-        <section class="header">
+        <nav class="topbar">
 
-            <div class="profile-icon">
-                👤
-            </div>
+            <div class="brand">
 
-            <div>
-
-                <h1>
-                    Employee Details
-                </h1>
-
-                <p>
-                    Complete employee information
-                </p>
+                AK<span>FLIX</span>
 
             </div>
+
+
+            <a
+                href="{% url 'dashboard' %}"
+                class="back-link"
+            >
+
+                ← Dashboard
+
+            </a>
+
+        </nav>
+
+
+        <!-- HEADING -->
+
+        <section class="heading">
+
+            <small>
+                Employee Management
+            </small>
+
+            <h1>
+
+                Employee
+                <span>Profile</span>
+
+            </h1>
 
         </section>
 
 
-        <!-- =========================
+        <!-- =================================================
              EMPLOYEE CARD
-        ========================= -->
+        ================================================= -->
 
         <section class="employee-card">
 
 
-            <div class="employee-heading">
+            <!-- EMPLOYEE HEADER -->
 
-                <div class="large-avatar">
-                    👨‍💼
+            <div class="employee-header">
+
+
+                <div class="avatar">
+
+                    {{ employee.employee_name|first|upper }}
+
                 </div>
+
 
                 <div>
 
-                    <div class="employee-name">
-                        {{ employee.employee_name }}
-                    </div>
+                    <h2>
 
-                    <div class="employee-id">
-                        Employee ID: {{ employee.employee_id }}
-                    </div>
+                        {{ employee.employee_name }}
+
+                    </h2>
+
+                    <p>
+
+                        {{ employee.designation }}
+
+                    </p>
 
                 </div>
+
 
             </div>
 
 
-            <!-- =========================
-                 EMPLOYEE INFORMATION
-            ========================= -->
+            <!-- =================================================
+                 DETAILS
+            ================================================= -->
 
             <div class="details-grid">
 
 
-                <div class="detail-box">
+                <div class="info">
 
-                    <div class="detail-label">
+                    <span class="label">
                         Employee ID
-                    </div>
+                    </span>
 
-                    <div class="detail-value">
+                    <span class="value">
                         {{ employee.employee_id }}
-                    </div>
+                    </span>
 
                 </div>
 
 
-                <div class="detail-box">
+                <div class="info">
 
-                    <div class="detail-label">
-                        Name
-                    </div>
-
-                    <div class="detail-value">
-                        {{ employee.employee_name }}
-                    </div>
-
-                </div>
-
-
-                <div class="detail-box">
-
-                    <div class="detail-label">
-                        Email
-                    </div>
-
-                    <div class="detail-value">
-                        {{ employee.email }}
-                    </div>
-
-                </div>
-
-
-                <div class="detail-box">
-
-                    <div class="detail-label">
-                        Phone
-                    </div>
-
-                    <div class="detail-value">
-                        {{ employee.phone }}
-                    </div>
-
-                </div>
-
-
-                <div class="detail-box">
-
-                    <div class="detail-label">
+                    <span class="label">
                         Department
-                    </div>
+                    </span>
 
-                    <div class="detail-value">
+                    <span class="value">
                         {{ employee.department }}
-                    </div>
+                    </span>
 
                 </div>
 
 
-                <div class="detail-box">
+                <div class="info">
 
-                    <div class="detail-label">
+                    <span class="label">
+                        Email
+                    </span>
+
+                    <span class="value">
+                        {{ employee.email }}
+                    </span>
+
+                </div>
+
+
+                <div class="info">
+
+                    <span class="label">
+                        Phone
+                    </span>
+
+                    <span class="value">
+                        {{ employee.phone }}
+                    </span>
+
+                </div>
+
+
+                <div class="info">
+
+                    <span class="label">
                         Designation
-                    </div>
+                    </span>
 
-                    <div class="detail-value">
+                    <span class="value">
                         {{ employee.designation }}
-                    </div>
+                    </span>
 
                 </div>
 
 
-                <div class="detail-box">
+                <div class="info">
 
-                    <div class="detail-label">
+                    <span class="label">
                         Salary
-                    </div>
+                    </span>
 
-                    <div class="detail-value">
+                    <span class="value">
                         {{ employee.salary }}
-                    </div>
+                    </span>
 
                 </div>
 
 
-                <div class="detail-box">
+                <div class="info">
 
-                    <div class="detail-label">
+                    <span class="label">
                         Joining Date
-                    </div>
+                    </span>
 
-                    <div class="detail-value">
+                    <span class="value">
                         {{ employee.joining_date }}
-                    </div>
+                    </span>
 
                 </div>
 
@@ -957,77 +1168,55 @@
             </div>
 
 
-            <!-- =========================
-                 NAVIGATION
-            ========================= -->
+            <!-- =================================================
+                 ACTIONS
+            ================================================= -->
 
-            <div class="navigation">
-
-
-                <a
-                    href="{% url 'dashboard' %}"
-                    class="nav-btn"
-                >
-                    📊 Dashboard
-                </a>
-
-
-                <a
-                    href="{% url 'employee_list' %}"
-                    class="nav-btn"
-                >
-                    👥 Employee List
-                </a>
+            <div class="actions">
 
 
                 <a
                     href="{% url 'employee_update' employee.id %}"
-                    class="nav-btn"
+                    class="button edit"
                 >
-                    ✏️ Edit Employee
+
+                    Edit Employee
+
                 </a>
 
 
                 <a
                     href="{% url 'employee_list' %}"
-                    class="nav-btn"
+                    class="button list"
                 >
-                    ← Back to List
+
+                    Employee List
+
                 </a>
 
 
-            </div>
-
-
-            <!-- =========================
-                 DELETE
-            ========================= -->
-
-            <div class="danger-area">
-
-                <div class="danger-title">
-                    ⚠️ Employee Management
-                </div>
-
+                <!-- DELETE FORM -->
 
                 <form
                     method="POST"
                     action="{% url 'employee_delete' employee.id %}"
+                    class="delete-form"
                     onsubmit="return confirm('Are you sure you want to delete this employee?');"
                 >
 
                     {% csrf_token %}
 
-
                     <button
                         type="submit"
-                        class="delete-btn"
+                        class="delete-button"
                     >
-                        🗑 Delete Employee
+
+                        Delete Employee
+
                     </button>
 
-
                 </form>
+
 
             </div>
 
@@ -1038,5 +1227,41 @@
     </main>
 
 
+    <!-- =====================================================
+         MOUSE 3D PARALLAX
+    ===================================================== -->
+
+    <script>
+
+        const scene =
+            document.querySelector(".scene");
+
+        document.addEventListener(
+            "mousemove",
+            function(event) {
+
+                const x =
+                    (event.clientX /
+                    window.innerWidth - .5) * 2;
+
+                const y =
+                    (event.clientY /
+                    window.innerHeight - .5) * 2;
+
+
+                scene.style.transform =
+                    `translate3d(
+                        ${x * -8}px,
+                        ${y * -8}px,
+                        0
+                    )`;
+
+            }
+        );
+
+    </script>
+
+
 </body>
+
 </html>
